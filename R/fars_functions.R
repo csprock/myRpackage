@@ -116,7 +116,7 @@ fars_read_years <- function(years) {
 #' @return data frame whose first column is the month and whose subsequent columns
 #' contain monthy accident counts for each year passed to the function
 #'
-#' @importFrom dplyr bind_rows, group_by, summarize
+#' @importFrom dplyr bind_rows group_by summarize
 #' @importFrom tidyr spread
 #'
 #' @examples
@@ -155,7 +155,7 @@ fars_summarize_years <- function(years) {
 #' of any in the FARS dataset
 #'
 #' @examples
-#' fars_map_state(1, 2013)
+#' \dontrun{fars_map_state(1, 2013)}
 #'
 #' @export
 fars_map_state <- function(state.num, year) {

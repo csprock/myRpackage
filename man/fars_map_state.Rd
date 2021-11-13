@@ -31,6 +31,6 @@ of any in the FARS dataset
 }
 
 \examples{
-fars_map_state(1, 2013)
+\dontrun{fars_map_state(1, 2013)}
 
 }
