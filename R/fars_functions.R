@@ -9,6 +9,8 @@
 #'
 #' Requires the \code{readr} and \code{tibble} packages.
 #'
+#' @seealso [fars_read_years()], [fars_summarize_years()], [fars_map_state()]
+#'
 #' @param filename path to the file
 #' @return a tibble
 #'
@@ -37,6 +39,8 @@ fars_read <- function(filename) {
 #' Generates the properly formatted file name for FARS dataset based on the year.
 #' Filenames are in the form "accident_<year>.csv.bz2".
 #'
+#' @seealso [fars_read_years()], [fars_map_state()]
+#'
 #' @param year year
 #' @return a valid FARS data file name
 #'
@@ -52,6 +56,7 @@ make_filename <- function(year) {
 
 #' Pre-format dataframe for selection
 #'
+#' @details
 #' This function takes a list of years and attempts to read the FARS
 #' data file into a data frame for each year. The year is then appended
 #' as a column to each data frame, Then it along with the MONTH column
@@ -64,8 +69,13 @@ make_filename <- function(year) {
 #'
 #' This function requires \code{dplyr}
 #'
+#' @seealso [fars_summarize_years()]
+#'
 #' @param years a list of years
 #' @return a list of tribbles with two columns, MONTH and year
+#'
+#' @importFrom dplyr mutate
+#' @importFrom dplyr select
 #'
 #' @section Errors:
 #' This function will raise an error if a FARS-formatted file
@@ -92,17 +102,22 @@ fars_read_years <- function(years) {
 
 #' Returns monthly number of accidents by year
 #'
+#' @details
 #' This function takes in a list of years and returns a data frame
 #' containing the monthly number of accidents for each year. The first column
 #' of the data frame contains the month, with subsequent columns each corresponding to
-#' a year and each row the number of accidents that occured in that month for that year.
+#' a year and each row the number of accidents that occurred in that month for that year.
 #'
-#' This function requires \code{dplyr}.
+#' This function requires \code{dplyr} and \code{tidyr}.
+#'
+#' @seealso
 #'
 #' @param years list of years
 #' @return data frame whose first column is the month and whose subsequent columns
 #' contain monthy accident counts for each year passed to the function
 #'
+#' @importFrom dplyr bind_rows, group_by, summarize
+#' @importFrom tidyr spread
 #'
 #' @examples
 #' \dontrun{
@@ -121,15 +136,19 @@ fars_summarize_years <- function(years) {
 
 #' Plots the locations of accidents on a state map
 #'
+#' @details
 #' This function takes number of a state in the FARS dataset along with a year
 #' and uses the \code{maps} package to plot the locations of each accident on a
 #' map of the state.
 #'
-#' This function requires \code{dplyr}
+#' This function requires \code{dplyr} and \code{maps}
 #'
 #' @param state.num number of the state in the FARS dataset
 #' @param year the year
 #' @return \code{NULL} if no data, else shows plot
+#'
+#' @importFrom maps map
+#' @importFrom dplyr filter
 #'
 #' @section Errors:
 #' Raises an error of the state number does not match that
