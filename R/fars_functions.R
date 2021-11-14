@@ -49,6 +49,7 @@ fars_read <- function(filename) {
 #' filename <- make_filename(2013)
 #' }
 #'
+#'@export
 make_filename <- function(year) {
   year <- as.integer(year)
   sprintf("accident_%d.csv.bz2", year)
@@ -110,8 +111,6 @@ fars_read_years <- function(years) {
 #'
 #' This function requires \code{dplyr} and \code{tidyr}.
 #'
-#' @seealso
-#'
 #' @param years list of years
 #' @return data frame whose first column is the month and whose subsequent columns
 #' contain monthy accident counts for each year passed to the function
@@ -143,8 +142,8 @@ fars_summarize_years <- function(years) {
 #'
 #' This function requires \code{dplyr} and \code{maps}
 #'
-#' @param state.num number of the state in the FARS dataset
-#' @param year the year
+#' @param state.num number of the state in the FARS dataset, must be set
+#' @param year the year, must be set of filename is NULL
 #' @return \code{NULL} if no data, else shows plot
 #'
 #' @importFrom maps map
@@ -159,6 +158,7 @@ fars_summarize_years <- function(years) {
 #'
 #' @export
 fars_map_state <- function(state.num, year) {
+
   filename <- make_filename(year)
   data <- fars_read(filename)
   state.num <- as.integer(state.num)

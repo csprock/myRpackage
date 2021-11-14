@@ -7,9 +7,9 @@
 fars_map_state(state.num, year)
 }
 \arguments{
-\item{state.num}{number of the state in the FARS dataset}
+\item{state.num}{number of the state in the FARS dataset, must be set}
 
-\item{year}{the year}
+\item{year}{the year, must be set of filename is NULL}
 }
 \value{
 \code{NULL} if no data, else shows plot

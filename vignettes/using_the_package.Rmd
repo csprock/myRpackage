@@ -1,0 +1,55 @@
+---
+title: "Using myRpackage with the FARS dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using myRpackage with the FARS dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(myRpackage)
+```
+
+**Note**: for any of these functions to work, the FARS data *must* be located in your current
+working directory. 
+
+# Loading Data
+
+The \code{fars_read} function accepts a single argument, \code{filename}, which 
+is a path to the FARS .csv file. 
+
+This example uses the sample data contained in the package. 
+
+```{r example_1, eval=FALSE}
+
+filename <- system.file("extdata", "accident_2013_sample.csv", package="myRpackage", mustWork=TRUE)
+fars_2013 <- fars_read(filename)
+
+```
+
+# Summarizing Data
+
+The \code{fars_summarize_years} function takes a vector of integers years and 
+returns the total number of accidents for each month for a given year. 
+
+```{r example_2, eval=FALSE}
+fars_summarize_years(c(2013, 2014))
+```
+
+# Visualizing the FARS Data on a Map
+
+The \code{fars_map_state} function takes two integer arguments, \code{state} and 
+\code{year} for the state number.
+
+```{r example_3, eval=FALSE}
+fars_map_state(5, 2014)
+```
+
