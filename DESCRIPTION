@@ -15,7 +15,8 @@ Imports:
     maps,
     readr,
     tibble,
-    tidyr
+    tidyr,
+    rlang
 Suggests: 
     rmarkdown,
     knitr,

@@ -30,6 +30,3 @@ annual_summary <- fars_summarize_years(list(2013, 2014))
 }
 
 }
-\seealso{
-
-}

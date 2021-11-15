@@ -77,6 +77,7 @@ make_filename <- function(year) {
 #'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
+#' @importFrom rlang .data
 #'
 #' @section Errors:
 #' This function will raise an error if a FARS-formatted file
@@ -92,7 +93,7 @@ fars_read_years <- function(years) {
     tryCatch({
       dat <- fars_read(file)
       dplyr::mutate(dat, year = year) %>%
-        dplyr::select(MONTH, year)
+        dplyr::select(.data$MONTH, year)
     }, error = function(e) {
       warning("invalid year: ", year)
       return(NULL)
@@ -115,8 +116,9 @@ fars_read_years <- function(years) {
 #' @return data frame whose first column is the month and whose subsequent columns
 #' contain monthy accident counts for each year passed to the function
 #'
-#' @importFrom dplyr bind_rows group_by summarize
+#' @importFrom dplyr bind_rows group_by summarize n
 #' @importFrom tidyr spread
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
@@ -127,9 +129,9 @@ fars_read_years <- function(years) {
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
   dplyr::bind_rows(dat_list) %>%
-    dplyr::group_by(year, MONTH) %>%
-    dplyr::summarize(n = n()) %>%
-    tidyr::spread(year, n)
+    dplyr::group_by(.data$year, .data$MONTH) %>%
+    dplyr::summarize(n = dplyr::n()) %>%
+    tidyr::spread(.data$year, .data$n)
 }
 
 
@@ -148,6 +150,7 @@ fars_summarize_years <- function(years) {
 #'
 #' @importFrom maps map
 #' @importFrom dplyr filter
+#' @importFrom rlang .data
 #'
 #' @section Errors:
 #' Raises an error of the state number does not match that
@@ -165,7 +168,7 @@ fars_map_state <- function(state.num, year) {
 
   if(!(state.num %in% unique(data$STATE)))
     stop("invalid STATE number: ", state.num)
-  data.sub <- dplyr::filter(data, STATE == state.num)
+  data.sub <- dplyr::filter(data, .data$STATE == state.num)
   if(nrow(data.sub) == 0L) {
     message("no accidents to plot")
     return(invisible(NULL))
