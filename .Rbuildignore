@@ -6,3 +6,8 @@
 ^doc$
 ^Meta$
 ^\.travis\.yml$
+^\.\.Rcheck$
+^\.git$
+^\.gitignore$
+^\.Rhistory$
+^vignettes/\.gitignore$

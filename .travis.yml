@@ -9,6 +9,7 @@ addons:
   apt:
     packages:
       - libxml2-dev
-warnings_are_errors: false
 script:
-  - R CMD check . --no-build-vignettes --no-manual
+  - cd ../
+  - R CMD build myRpackage
+  - R CMD check myRpackage_*.tar.gz --no-build-vignettes --no-manual

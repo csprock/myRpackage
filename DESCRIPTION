@@ -6,7 +6,7 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Author: Carson Sprock
 Maintainer: Carson Sprock <csprock@gmail.com>
-Description: Assignment from Coursera
+Description: This package is a for a Coursera assignment.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
