@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
 library(myRpackage)
 ```
 
+# Introduction 
+
+This package contains functions for reading, summarizing and visualizing the \href{Fatality Analysis Reporting System (FARS)}{https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars} data. 
+
 **Note**: for any of these functions to work, the FARS data *must* be located in your current
 working directory. 
 
